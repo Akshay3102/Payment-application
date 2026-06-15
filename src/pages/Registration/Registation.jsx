@@ -7,13 +7,17 @@ import {
   FaLock,
   FaArrowRight,
   FaEye,
+  FaEyeSlash,
 } from "react-icons/fa";
 
 import useAuthStore from "../../store/authStore";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const register = useAuthStore((state) => state.register);
+
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     firstName: "",
@@ -24,14 +28,15 @@ const Registration = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const validateForm = () => {
     let newErrors = {};
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
     if (!form.firstName.trim()) {
       newErrors.firstName = "First name is required";
@@ -55,13 +60,9 @@ const Registration = () => {
     }
 
     if (!form.confirmPassword) {
-      newErrors.confirmPassword =
-        "Confirm password is required";
-    } else if (
-      form.password !== form.confirmPassword
-    ) {
-      newErrors.confirmPassword =
-        "Passwords do not match";
+      newErrors.confirmPassword = "Confirm password is required";
+    } else if (form.password !== form.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
     }
 
     setErrors(newErrors);
@@ -90,15 +91,12 @@ const Registration = () => {
 
     register(form);
 
-    alert("Registered Successfully");
+    navigate("/business-loan");
   };
 
   return (
     <div className={styles.wrapper}>
-      <form
-        className={styles.form}
-        onSubmit={handleSubmit}
-      >
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.iconBox}>
           <FaUserPlus />
         </div>
@@ -119,9 +117,7 @@ const Registration = () => {
 
             <div
               className={`${styles.input} ${
-                errors.firstName
-                  ? styles.errorInput
-                  : ""
+                errors.firstName ? styles.errorInput : ""
               }`}
             >
               <FaUser />
@@ -135,9 +131,7 @@ const Registration = () => {
             </div>
 
             {errors.firstName && (
-              <span className={styles.error}>
-                {errors.firstName}
-              </span>
+              <span className={styles.error}>{errors.firstName}</span>
             )}
           </div>
 
@@ -146,9 +140,7 @@ const Registration = () => {
 
             <div
               className={`${styles.input} ${
-                errors.lastName
-                  ? styles.errorInput
-                  : ""
+                errors.lastName ? styles.errorInput : ""
               }`}
             >
               <FaUser />
@@ -162,9 +154,7 @@ const Registration = () => {
             </div>
 
             {errors.lastName && (
-              <span className={styles.error}>
-                {errors.lastName}
-              </span>
+              <span className={styles.error}>{errors.lastName}</span>
             )}
           </div>
         </div>
@@ -172,11 +162,7 @@ const Registration = () => {
         <label>Email Address *</label>
 
         <div
-          className={`${styles.input} ${
-            errors.email
-              ? styles.errorInput
-              : ""
-          }`}
+          className={`${styles.input} ${errors.email ? styles.errorInput : ""}`}
         >
           <FaEnvelope />
 
@@ -188,77 +174,81 @@ const Registration = () => {
           />
         </div>
 
-        {errors.email && (
-          <span className={styles.error}>
-            {errors.email}
-          </span>
-        )}
+        {errors.email && <span className={styles.error}>{errors.email}</span>}
 
         <label>Password *</label>
 
         <div
           className={`${styles.input} ${
-            errors.password
-              ? styles.errorInput
-              : ""
+            errors.password ? styles.errorInput : ""
           }`}
         >
           <FaLock />
 
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
           />
 
-          <FaEye />
+          {showPassword ? (
+            <FaEyeSlash
+              onClick={() => setShowPassword(false)}
+              style={{ cursor: "pointer" }}
+            />
+          ) : (
+            <FaEye
+              onClick={() => setShowPassword(true)}
+              style={{ cursor: "pointer" }}
+            />
+          )}
         </div>
 
         {errors.password && (
-          <span className={styles.error}>
-            {errors.password}
-          </span>
+          <span className={styles.error}>{errors.password}</span>
         )}
 
         <small>
-          Must contain 1 uppercase letter,
-          1 number, minimum 8 characters.
+          Must contain 1 uppercase letter, 1 number, minimum 8 characters.
         </small>
 
         <label>Confirm Password *</label>
 
         <div
           className={`${styles.input} ${
-            errors.confirmPassword
-              ? styles.errorInput
-              : ""
+            errors.confirmPassword ? styles.errorInput : ""
           }`}
         >
           <FaLock />
 
           <input
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             name="confirmPassword"
             placeholder="Confirm Password"
             value={form.confirmPassword}
             onChange={handleChange}
           />
 
-          <FaEye />
+          {showConfirmPassword ? (
+            <FaEyeSlash
+              onClick={() => setShowConfirmPassword(false)}
+              style={{ cursor: "pointer" }}
+            />
+          ) : (
+            <FaEye
+              onClick={() => setShowConfirmPassword(true)}
+              style={{ cursor: "pointer" }}
+            />
+          )}
         </div>
 
         {errors.confirmPassword && (
-          <span className={styles.error}>
-            {errors.confirmPassword}
-          </span>
+          <span className={styles.error}>{errors.confirmPassword}</span>
         )}
 
-        <button
-          type="submit"
-          className={styles.submit}
-        >
+        <button type="submit" className={styles.submit}>
           Continue
           <FaArrowRight />
         </button>
