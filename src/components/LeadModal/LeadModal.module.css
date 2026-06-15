@@ -1,0 +1,173 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(17, 24, 39, 0.45);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 999;
+}
+
+.modal {
+    width: 800px;
+    max-width: 95%;
+
+    background: white;
+    border-radius: 24px;
+
+    overflow: hidden;
+}
+
+.header {
+    padding: 16px 28px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.header h2 {
+    font-size: 26px;
+    margin-bottom: 4px;
+}
+
+.header p {
+    color: #6b7280;
+}
+
+.close {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.scoreSection {
+    padding: 32px;
+    text-align: center;
+}
+
+.score {
+    font-size: 72px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.scoreSection h3 {
+    margin-top: 10px;
+}
+
+.scoreSection p {
+    color: #6b7280;
+    margin-top: 6px;
+}
+
+.badge {
+    display: inline-block;
+    margin-top: 14px;
+
+    background: #dbeafe;
+    color: #2563eb;
+
+    padding: 8px 18px;
+    border-radius: 999px;
+}
+
+.infoCard {
+    margin: 0 24px 20px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+
+    padding:8px 24px;
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.bottomCards {
+    margin: 0 28px 28px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.smallCard {
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+
+    padding: 24px;
+
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.iconPurple,
+.iconBlue,
+.iconGreen {
+    width: 56px;
+    height: 56px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+}
+
+.iconPurple {
+    background: #7c3aed;
+}
+
+.iconBlue {
+    background: #2563eb;
+}
+
+.iconGreen {
+    background: #10b981;
+}
+
+.readyBadge {
+    background: #dcfce7;
+    color: #16a34a;
+
+    padding: 6px 12px;
+    border-radius: 999px;
+}
+
+.purchaseBtn {
+    width: calc(100% - 56px);
+
+    margin: 0 24px 24px;
+
+    height: 56px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    cursor: pointer;
+}
+
+.gaugeWrapper {
+    width: 350px;
+    margin: 0 auto;
+}
